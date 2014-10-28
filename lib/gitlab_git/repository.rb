@@ -738,9 +738,12 @@ module Gitlab
         content.split("\n").each do |txt|
           if txt.match(/^\s*\[/)
             current = txt.match(/(?<=").*(?=")/)[0]
+            puts "\nSubmodule '#{current}'"
             results[current] = {}
           else
             match_data = txt.match(/(\w+)\s*=\s*(.*)/)
+            puts "Processing line: '#{txt}'"
+            puts "  Processing attribute '#{match_data[1]}'"
             results[current][match_data[1]] = match_data[2]
 
             if match_data[1] == "path"
